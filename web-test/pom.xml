@@ -67,12 +67,23 @@
             <version>${jquery.version}</version>
         </dependency>
 
-        <!--    activeMQ    -->
+        <!--    activeMQ原生依赖    -->
+<!--        <dependency>-->
+<!--            <artifactId>activemq-all</artifactId>-->
+<!--            <groupId>org.apache.activemq</groupId>-->
+<!--            <version>5.9.0</version>-->
+<!--        </dependency>-->
+
         <dependency>
-            <artifactId>activemq-all</artifactId>
-            <groupId>org.apache.activemq</groupId>
-            <version>5.9.0</version>
+            <artifactId>spring-boot-starter-activemq</artifactId>
+            <groupId>org.springframework.boot</groupId>
         </dependency>
+<!--        <dependency>-->
+<!--            <artifactId>activemq-pool</artifactId>-->
+<!--            <groupId>org.apache.activemq</groupId>-->
+<!--        </dependency>-->
+
+
 
 
     </dependencies>
