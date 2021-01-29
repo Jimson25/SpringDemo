@@ -1,4 +1,4 @@
-package com.demo.web;
+package com.demo;
 
 
 import org.apache.activemq.ActiveMQConnectionFactory;
