@@ -1,0 +1,9 @@
+server:
+  port: 7002
+
+spring:
+  rabbitmq:
+    host: bailegedu.com
+    port: 5672
+    username: admin
+    password: admin
