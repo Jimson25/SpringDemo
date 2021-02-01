@@ -4,6 +4,7 @@ import com.demo.rabbitmq.工作模式.common.CommonField;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
+import com.rabbitmq.client.MessageProperties;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -24,9 +25,8 @@ public class Producer {
 
         //rabbitmq使用的是nio，
         Connection connection = factory.newConnection();
-        //简历信道
+        //建立信道
         Channel channel = connection.createChannel();
-
         /*
          * 在rabbitmq中声明一个队列
          *  - queue         队列名称
@@ -35,14 +35,17 @@ public class Producer {
          *  - autoDelete    当最后一个消费者断开后是否删除队列
          *  - arguments     其他参数
          */
-        channel.queueDeclare("hello-world", false, false, false, null);
+        channel.queueDeclare("Operating mode", true, false, false, null);
 
         for (int i = 0; ; i++) {
             String msg = "这是第" + i + "条消息";
             if (i == 50) {
                 msg = "Q";
             }
-            channel.basicPublish("", "hello-world", null, msg.getBytes(StandardCharsets.UTF_8));
+            //发送消息
+            channel.basicPublish("", "Operating mode",
+                    MessageProperties.PERSISTENT_TEXT_PLAIN, //设置消息持久化
+                    msg.getBytes(StandardCharsets.UTF_8));
             System.out.println("第" + i + "条消息已发送");
             Thread.sleep(1000);
         }
