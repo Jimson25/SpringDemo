@@ -29,7 +29,7 @@ public class Consumer {
          *  - autoDelete    当最后一个消费者断开后是否删除队列
          *  - arguments     其他参数
          */
-        channel.queueDeclare("Operating mode", true, false, false, null);
+//        channel.queueDeclare("Operating mode", true, false, false, null);
 
         //设置该消费者一次只接收一条消息
         channel.basicQos(1);
@@ -38,15 +38,20 @@ public class Consumer {
             String msg = new String(message.getBody(), StandardCharsets.UTF_8);
             //这里当确认接收的消息是`Q`的时候就结束程序运行，那么Q这一条消息会被生产者回收然后发送给其他的消费者处理
             //我们可以等这个消费者结束后在重新启动一个没有做校验的消费者，如果新的消费者接收到了Q这一条消息，就说明消息确认机制工作正常
-            if ("Q".equals(msg)) {
-                System.exit(0);
-            }
+//            if ("Q".equals(msg)) {
+//                System.exit(0);
+//            }
             System.out.println("consumerTag: " + consumerTag + " == 收到消息： " + msg);
             //消息确认，false表示只向中间件确认这一条消息已经处理完毕
             channel.basicAck(message.getEnvelope().getDeliveryTag(), false);
         };
-        CancelCallback cancel = System.out::println;
+
+        //当一个消费者断开连接后的回调
+        CancelCallback cancel = consumerTag -> System.out.println("CancelCallback-consumerTag::" + consumerTag);
+
+        //这才开启一个消费者，连接到 ‘Operating mode’这个队列
         //把自动消息确认关闭掉 autoAck = false表示关掉自动确认
         channel.basicConsume("Operating mode", false, callback, cancel);
+
     }
 }

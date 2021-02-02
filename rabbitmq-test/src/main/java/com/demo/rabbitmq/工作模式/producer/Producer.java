@@ -39,9 +39,9 @@ public class Producer {
 
         for (int i = 0; ; i++) {
             String msg = "这是第" + i + "条消息";
-            if (i == 50) {
-                msg = "Q";
-            }
+//            if (i == 50) {
+//                msg = "Q";
+//            }
             //发送消息
             channel.basicPublish("", "Operating mode",
                     MessageProperties.PERSISTENT_TEXT_PLAIN, //设置消息持久化
