@@ -22,7 +22,7 @@ public class Consumer {
         //主动声明一个不自动删除、不持久化的五额外参数的交换机
         //logs：交换机名称
         //fanout：交换机类型
-        channel.exchangeDeclare("logs", "fanout");
+        //channel.exchangeDeclare("logs", "fanout");
 
         //Actively declare a server-named exclusive, autodelete, non-durable queue.
         //主动声明一个独占的、自动删除的、不持久化的队列，获取队列名称
