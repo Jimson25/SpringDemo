@@ -44,6 +44,11 @@ public class Consumer {
             System.out.println("consumerTag: " + consumerTag + " == 收到消息： " + msg);
             //消息确认，false表示只向中间件确认这一条消息已经处理完毕
             channel.basicAck(message.getEnvelope().getDeliveryTag(), false);
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         };
 
         //当一个消费者断开连接后的回调
